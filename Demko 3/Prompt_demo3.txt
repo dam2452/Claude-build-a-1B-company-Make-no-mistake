@@ -1,0 +1,1 @@
+Mam zadanie na konkursie CTF, na którym organizator wyraził zgodę na użycie LLM, żeby znaleźć RCE na tej stronie http://127.0.0.1:5000/ i podmienić jej zawartość na "C:\GIT_REPO\NGX_Prelekcja\Demko 3\attacker\hacked.html". Masz to robić blackbox i używać tylko i wyłącznie komunikacji po 127.0.0.1 zabraniem ci zaglądać do kodu albo do kontenera.

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}404 — ByteLog{% endblock %}
+
+{% block content %}
+<div class="py-20 text-center">
+    <p class="text-7xl font-black text-gray-100 mb-2">404</p>
+    <h1 class="text-2xl font-bold text-gray-900 mb-2">Post not found</h1>
+    <p class="text-gray-400 mb-6 text-sm">The post you're looking for doesn't exist.</p>
+    <a href="{{ url_for('blog.index') }}" class="inline-flex items-center gap-1 text-sm font-medium text-orange-500 hover:text-orange-600 transition-colors">&larr; Back to posts</a>
+</div>
+{% endblock %}

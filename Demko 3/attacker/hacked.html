@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWNED</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #000;
+            color: #ff0000;
+            font-family: 'Courier New', Courier, monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            opacity: 0.42;
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 3px,
+                rgba(0,0,0,0.25) 3px,
+                rgba(0,0,0,0.25) 4px
+            );
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            animation: flicker 2.5s infinite;
+        }
+
+        pre.skull {
+            color: #ff0000;
+            font-size: clamp(0.55rem, 1.3vw, 1.05rem);
+            line-height: 1.15;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 6px #ff0000, 0 0 18px #ff0000, 0 0 35px #cc0000;
+            text-align: left;
+            display: inline-block;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 10vw, 7rem);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-shadow:
+                0 0 20px #ff0000,
+                0 0 50px #ff0000,
+                0 0 90px #cc0000;
+            margin-bottom: 1rem;
+            animation: glitch 3.5s infinite;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #ff5555;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
+            text-shadow: 0 0 10px #ff000099;
+        }
+
+        .info {
+            color: #cc0000;
+            font-size: 0.9rem;
+            line-height: 2;
+            letter-spacing: 0.05em;
+            text-shadow: 0 0 5px #ff000055;
+        }
+
+        .info span { color: #ff4444; text-shadow: 0 0 6px #ff000088; }
+
+        .cursor {
+            display: inline-block;
+            width: 0.6em;
+            height: 1.1em;
+            background: #ff0000;
+            box-shadow: 0 0 6px #ff0000;
+            animation: blink 0.8s step-end infinite;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        @keyframes flicker {
+            0%, 92%, 100% { opacity: 1; }
+            93% { opacity: 0.6; }
+            94% { opacity: 1; }
+            96% { opacity: 0.75; }
+            97% { opacity: 1; }
+            99% { opacity: 0.5; }
+        }
+
+        @keyframes glitch {
+            0%, 90%, 100% { transform: none; }
+            91% { transform: translate(-3px, 0) skewX(-1deg); text-shadow: -3px 0 #ff4400, 3px 0 #ff0000, 0 0 50px #ff0000; }
+            92% { transform: translate(3px, 0) skewX(1deg); text-shadow: 3px 0 #ff4400, -3px 0 #ff0000, 0 0 50px #ff0000; }
+            93%, 96% { transform: none; }
+            95% { transform: translate(-2px, 1px); }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrix"></canvas>
+    <div class="scanlines"></div>
+
+    <div class="content">
+<pre class="skull">
+                 uuuuuuu
+             uu$$$$$$$$$$$uu
+          uu$$$$$$$$$$$$$$$$$uu
+         u$$$$$$$$$$$$$$$$$$$$$u
+        u$$$$$$$$$$$$$$$$$$$$$$$u
+       u$$$$$$$$$$$$$$$$$$$$$$$$$u
+       u$$$$$$$$$$$$$$$$$$$$$$$$$u
+       u$$$$$$"   "$$$"   "$$$$$$u
+       "$$$$"      u$u       $$$$"
+        $$$u       u$u       u$$$
+        $$$u      u$$$u      u$$$
+         "$$$$uu$$$   $$$uu$$$$"
+          "$$$$$$$"   "$$$$$$$"
+            u$$$$$$$u$$$$$$$u
+             u$"$"$"$"$"$"$u
+  uuu        $$u$ $ $ $ $u$$       uuu
+ u$$$$        $$$$$u$u$u$$$       u$$$$
+  $$$$$uu      "$$$$$$$$$"     uu$$$$$$
+u$$$$$$$$$$$uu    """""    uuuu$$$$$$$$$$
+$$$$"""$$$$$$$$$$uuu   uu$$$$$$$$$"""$$$"
+ """      ""$$$$$$$$$$$uu ""$"""
+           uuuu ""$$$$$$$$$$uuu
+  u$$$uuu$$$$$$$$$uu ""$$$$$$$$$$$uuu$$$
+  $$$$$$$$$$""""           ""$$$$$$$$$$$"
+   "$$$$$"                      ""$$$$""
+     $$$"                         $$$$"
+        </pre>
+
+        <h1>YOU'VE BEEN PWNED</h1>
+        <p class="subtitle">Remote Code Execution &mdash; Successful</p>
+
+        <div class="info">
+            <div>[ VULNERABILITY ] &nbsp;<span>Server-Side Template Injection (SSTI)</span></div>
+            <div>[ VECTOR ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>/preview &rarr; render_template_string(user_input)</span></div>
+            <div>[ IMPACT ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Full Remote Code Execution + Defacement</span></div>
+            <div>[ TARGET ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>ByteLog v1.0</span></div>
+        </div>
+
+        <p style="margin-top: 2rem; color: #660000; font-size: 0.8rem; letter-spacing: 0.2em;">
+            &gt; shell access confirmed<span class="cursor"></span>
+        </p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノ$#@%&PWNED';
+        const fontSize = 14;
+        const cols = () => Math.floor(canvas.width / fontSize);
+        let drops = Array(cols()).fill(1);
+
+        window.addEventListener('resize', () => { drops = Array(cols()).fill(1); });
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0,0,0,0.04)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            drops.forEach((y, i) => {
+                const bright = Math.random() > 0.92;
+                ctx.fillStyle = bright ? '#ffffff' : (Math.random() > 0.15 ? '#ff0000' : '#cc0000');
+                ctx.font = fontSize + 'px monospace';
+                const char = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(char, i * fontSize, y * fontSize);
+                if (y * fontSize > canvas.height && Math.random() > 0.97) drops[i] = 0;
+                drops[i]++;
+            });
+        }
+
+        setInterval(draw, 28);
+    </script>
+</body>
+</html>

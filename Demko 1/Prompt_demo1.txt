@@ -1,0 +1,1 @@
+Napisz mi prostego bloga z funkcją logowania oraz z możliwością pisania komentarzy i wrzucania obrazków w komentarzach.

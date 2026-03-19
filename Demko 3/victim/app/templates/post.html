@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }} — ByteLog{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl">
+    <div class="mb-8">
+        <a href="{{ url_for('blog.index') }}" class="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-orange-500 transition-colors mb-6">&larr; All posts</a>
+        <h1 class="text-3xl font-bold text-gray-900 leading-tight tracking-tight mb-5">{{ post.title }}</h1>
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-sm font-bold flex-shrink-0">{{ post.author[0] | upper }}</div>
+            <div>
+                <div class="text-sm font-semibold text-gray-800">{{ post.author }}</div>
+                <div class="text-xs text-gray-400">{{ post.created_at[:10] }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="h-px bg-gray-100 mb-8"></div>
+
+    <div class="prose">
+        {{ post.content | safe }}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}ByteLog — Developer Blog{% endblock %}
+
+{% block content %}
+
+<div class="flex items-end justify-between mb-8">
+    <div>
+        <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Developer Notes</h1>
+        <p class="text-gray-500 mt-1">Thoughts on Python, infrastructure, and software craft.</p>
+    </div>
+    <span class="text-sm text-gray-400">{{ posts | length }} post{{ 's' if posts | length != 1 }}</span>
+</div>
+
+{% if posts %}
+
+<div class="mb-8">
+    {% set featured = posts[0] %}
+    <a href="{{ url_for('blog.post', post_id=featured.id) }}" class="block group">
+        <div class="bg-white rounded-2xl border border-gray-200 p-8 hover:border-orange-300 hover:shadow-md transition-all">
+            <div class="flex items-center gap-2 mb-4">
+                <span class="bg-orange-100 text-orange-600 text-xs font-bold px-2.5 py-1 rounded-full">Latest</span>
+                <span class="text-xs text-gray-400">{{ featured.created_at[:10] }}</span>
+                <span class="text-xs text-gray-300">&middot;</span>
+                <span class="text-xs text-gray-500 font-medium">{{ featured.author }}</span>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-orange-500 transition-colors leading-snug">
+                {{ featured.title }}
+            </h2>
+            <p class="text-gray-500 leading-relaxed line-clamp-3">{{ featured.content | striptags | truncate(280) }}</p>
+            <span class="inline-flex items-center gap-1 mt-5 text-sm font-medium text-orange-500 group-hover:gap-2 transition-all">Read article <span>&rarr;</span></span>
+        </div>
+    </a>
+</div>
+
+{% if posts | length > 1 %}
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    {% for post in posts[1:] %}
+    <a href="{{ url_for('blog.post', post_id=post.id) }}" class="block group">
+        <article class="bg-white rounded-xl border border-gray-200 p-6 h-full hover:border-orange-300 hover:shadow-sm transition-all flex flex-col">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="text-xs text-gray-400">{{ post.created_at[:10] }}</span>
+                <span class="text-xs text-gray-300">&middot;</span>
+                <span class="text-xs text-gray-500 font-medium">{{ post.author }}</span>
+            </div>
+            <h2 class="text-base font-bold text-gray-900 mb-2 group-hover:text-orange-500 transition-colors leading-snug flex-1">
+                {{ post.title }}
+            </h2>
+            <p class="text-gray-400 text-sm leading-relaxed line-clamp-2 mt-1">{{ post.content | striptags | truncate(120) }}</p>
+            <span class="inline-flex items-center gap-1 mt-4 text-xs font-medium text-orange-500">Read &rarr;</span>
+        </article>
+    </a>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% else %}
+<div class="py-20 text-center bg-white rounded-2xl border border-dashed border-gray-200">
+    <p class="text-gray-400 mb-3">No posts yet.</p>
+    <a href="{{ url_for('blog.write') }}" class="text-sm font-medium text-orange-500 hover:text-orange-600">Write the first one &rarr;</a>
+</div>
+{% endif %}
+
+{% endblock %}

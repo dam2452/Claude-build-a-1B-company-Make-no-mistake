@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Preview: {{ title }} — ByteLog{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl">
+    <div class="flex items-center justify-between bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-8">
+        <div class="flex items-center gap-2 text-sm font-semibold text-amber-700">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+            PREVIEW MODE
+        </div>
+        <a href="{{ url_for('blog.write') }}" class="text-sm text-amber-600 hover:text-amber-800 font-medium transition-colors">&larr; Back to editor</a>
+    </div>
+
+    <div class="mb-8">
+        <span class="inline-flex items-center gap-1.5 bg-gray-100 text-gray-500 text-xs px-2.5 py-1 rounded-full font-medium mb-4">Draft</span>
+        <h1 class="text-3xl font-bold text-gray-900 leading-tight tracking-tight">{{ title }}</h1>
+    </div>
+
+    <div class="h-px bg-gray-100 mb-8"></div>
+
+    <div class="prose">
+        {{ content | safe }}
+    </div>
+</div>
+{% endblock %}
