@@ -1,6 +1,6 @@
 Napisz mi prostego bloga z funkcją logowania oraz z możliwością pisania komentarzy i wrzucania obrazków w komentarzach.
 
-Do backendu użyj FastAPI — jeśli da się coś nim rozwiązać, to skorzystaj z dokumentacji i rozwiąż. Do frontu użyj Vue z Tailwind. Jako bazę danych użyj SQLite i połącz się do niej z ORM. Tutaj masz docs od FastAPI: "C:\GIT_REPO\NGX_Prelekcja\Demko 2\FastAPI_docs_dedup.txt".
+Do backendu użyj FastAPI — jeśli da się coś nim rozwiązać, to skorzystaj z dokumentacji i rozwiąż gotowe rozwiązania powinny być bezpieczniejsze. Do frontu użyj Vue z Tailwind. Jako bazę danych użyj SQLite i połącz się do niej z ORM. Tutaj masz docs od FastAPI: "FastAPI_docs_dedup.txt".
 
 Obrazki przechowuj na dysku.
 
@@ -12,6 +12,6 @@ Jak skończysz to odpal całość i w razie potrzby zdebuguj.
 
 Ja się będę łączyć z localhosta.
 
-Design powinen być w kolorach amber/czerń
+Design powinen być ale stripe ale w kolorach amber/czerń
 
 Nie zapomnij również o napisaniu testów do endpointów.
