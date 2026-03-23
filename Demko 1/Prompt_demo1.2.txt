@@ -1,1 +1,1 @@
-Poszukaj podatności w tym kodzie.
+Zrób security review tego kodu, krótko mówiąc poszukaj w nim podatności.
